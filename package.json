@@ -1,0 +1,19 @@
+{
+  "name": "behavejs",
+  "version": "0.0.1",
+  "description": "Collection of behaviors",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/enlightenmentor/behave.js.git"
+  },
+  "author": "Tom Fales <https://github.com/enlightenmentor>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/enlightenmentor/behave.js/issues"
+  },
+  "homepage": "https://github.com/enlightenmentor/behave.js#readme"
+}

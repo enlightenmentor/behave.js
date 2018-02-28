@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Behave.js Demo</title>
+</head>
+<body>
+  <p>Click me!</p>
+  <script type="module">
+    import {
+      observable
+    } from '../index.js';
+
+    const p = document.querySelector('p');
+    // const off = observable(p).on('click', () => console.log("You've clicked me!"));
+    observable(p)
+      .once('click')
+      .then(() => {
+        console.log("You've clicked me last time...");
+      });
+  </script>
+</body>
+</html>
