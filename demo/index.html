@@ -18,7 +18,8 @@
   <p id="draggable">I'm Draggable. Drag me!</p>
   <script type="module">
     import {
-      observable
+      observable,
+      focusable
     } from '../index.js';
 
     const obsP = document.querySelector('#observable');
@@ -28,6 +29,9 @@
         console.log("You've clicked observable last time...");
         off();
       });
+
+    const focP = document.querySelector('#focusable');
+    focusable(focP, 1);
   </script>
 </body>
 </html>
