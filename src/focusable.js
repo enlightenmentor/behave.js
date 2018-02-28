@@ -11,8 +11,12 @@ function focusable(node, tabindex=-1) {
   node.setAttribute('data-focusable', '');
   node.setAttribute('tabindex', tabindex);
   const obs = observable(node);
-  obs.on('focus', () => node.setAttribute('data-focused', ''));
-  obs.on('blur', () => node.removeAttribute('data-focused'));
+  obs.on('focus', function() {
+    this.setAttribute('data-focused', '');
+  });
+  obs.on('blur', function() {
+    this.removeAttribute('data-focused');
+  });
   return node;
 }
 
