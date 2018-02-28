@@ -36,7 +36,7 @@ function once(event) {
  * Adds observable behavior to HTML element.
  * 
  * @param {HTMLElement} node
- * @param {boolean} [permanently=false] Indicates that behavior is added permanently
+ * @param {boolean} [permanently=false] Indicates that behavior is added permanently. Defaults to false
  * @returns {(observable|HTMLElement)} Same HTML element but with additional functionality
  */
 function observable(node, permanently=false) {
