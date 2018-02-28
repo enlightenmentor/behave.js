@@ -5,20 +5,28 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Behave.js Demo</title>
+  <style>
+    p {
+      user-select: none;
+      cursor: default;
+    }
+  </style>
 </head>
 <body>
-  <p>Click me!</p>
+  <p id="observable">I'm Observable. Click me! Double click me to stop it!</p>
+  <p id="focusable">I'm Focusable. Click me!</p>
+  <p id="draggable">I'm Draggable. Drag me!</p>
   <script type="module">
     import {
       observable
     } from '../index.js';
 
-    const p = document.querySelector('p');
-    // const off = observable(p).on('click', () => console.log("You've clicked me!"));
-    observable(p)
-      .once('click')
+    const obsP = document.querySelector('#observable');
+    const off = observable(obsP).on('click', () => console.log("You've clicked observable!"));
+    observable(obsP).once('dblclick')
       .then(() => {
-        console.log("You've clicked me last time...");
+        console.log("You've clicked observable last time...");
+        off();
       });
   </script>
 </body>

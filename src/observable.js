@@ -30,13 +30,20 @@ function once(event) {
  * Adds observable behavior to HTML element.
  * 
  * @param {HTMLElement} node
+ * @param {boolean} [permanent=false] Indicates that behavior is added permanently
  * @returns {HTMLElement} Same HTML element but with additional functionality
  */
-function observable(node) {
-  node.setAttribute('data-observable', '');
-  node.on = on.bind(node);
-  node.once = once.bind(node);
-  return node;
+function observable(node, permanent=false) {
+  if (permanent) {
+    node.setAttribute('data-observable', '');
+    node.on = on.bind(node);
+    node.once = once.bind(node);
+    return node;
+  }
+  return {
+    on: on.bind(node),
+    once: once.bind(node)
+  }
 }
 
 export default observable;
