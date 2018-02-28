@@ -1,4 +1,10 @@
 /**
+ * @typedef {Object} observable
+ * @property {Function} on Adds event listener on HTML element
+ * @property {Function} once Adds one time event listener on HTML element
+ */
+
+/**
  * Adds event listener on HTML element
  * 
  * @param {string} event
@@ -31,7 +37,7 @@ function once(event) {
  * 
  * @param {HTMLElement} node
  * @param {boolean} [permanently=false] Indicates that behavior is added permanently
- * @returns {HTMLElement} Same HTML element but with additional functionality
+ * @returns {(observable|HTMLElement)} Same HTML element but with additional functionality
  */
 function observable(node, permanently=false) {
   if (permanently) {
