@@ -1,7 +1,7 @@
 import observable from './observable.js';
 
 /**
- * Adds focusable behavior to HTML element.
+ * Adds focusable behavior to HTML element
  * 
  * @param {HTMLElement} node
  * @param {number} [tabindex=-1] Value of tabindex attribute. Defaults to -1
