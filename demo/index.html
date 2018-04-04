@@ -7,31 +7,58 @@
   <title>Behave.js Demo</title>
   <style>
     p {
+      display: inline-block;
       user-select: none;
       cursor: default;
+    }
+    p:focus {
+      font-weight: bold;
+    }
+    #focusable {
+      cursor: pointer;
+    }
+    #draggable {
+      cursor: move;
     }
   </style>
 </head>
 <body>
-  <p id="observable">I'm Observable. Click me! Double click me to stop it!</p>
-  <p id="focusable">I'm Focusable. Click me!</p>
+  <p id="observable">I'm Observable. Click me! Double click me to stop it!</p><br>
+  <p id="focusable">I'm Focusable. Click me!</p><br>
   <p id="draggable">I'm Draggable. Drag me!</p>
   <script type="module">
     import {
       observable,
-      focusable
+      focusable,
+      draggable
     } from '../index.js';
 
     const obsP = document.querySelector('#observable');
-    const off = observable(obsP).on('click', () => console.log("You've clicked observable!"));
+    const off = observable(obsP).on('click', function() {
+      const r = Math.floor(Math.random() * 255);
+      const g = Math.floor(Math.random() * 255);
+      const b = Math.floor(Math.random() * 255);
+      this.style.color = `rgb(${r},${g},${b})`
+    });
     observable(obsP).once('dblclick')
       .then(() => {
         console.log("You've clicked observable last time...");
         off();
       });
 
-    const focP = document.querySelector('#focusable');
-    focusable(focP, 1);
+    const focusP = document.querySelector('#focusable');
+    focusable(focusP, 0);
+
+    const dragP = document.querySelector('#draggable');
+    const obsDragP = observable(draggable(dragP));
+    let x = 0;
+    let y = 0;
+    obsDragP.on('dragging', function(e) {
+      x += e.detail.diffX;
+      y += e.detail.diffY;
+      this.style.transform = `translate(${x}px, ${y}px)`;
+      console.log(e.detail);
+    });
   </script>
 </body>
 </html>
