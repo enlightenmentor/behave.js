@@ -33,22 +33,39 @@ function once(event) {
 }
 
 /**
+ * Emits custom event from HTML element
+ * 
+ * @param {string} event
+ * @param {any} detail
+ * @param {any} options
+ */
+function emit(event, detail, options) {
+  const customEvent = new CustomEvent(event, {
+    detail,
+    ...options
+  })
+  this.dispatchEvent(customEvent);
+}
+
+/**
  * Adds observable behavior to HTML element.
  * 
- * @param {HTMLElement} node
+ * @param {EventTarget} node
  * @param {boolean} [permanently=false] Indicates that behavior is added permanently. Defaults to false
- * @returns {(observable|HTMLElement)} Object or the same HTML element with additional functionality
+ * @returns {(observable|EventTarget)} Object or the same HTML element with additional functionality
  */
 function observable(node, permanently=false) {
   if (permanently) {
     node.setAttribute('data-observable', '');
     node.on = on.bind(node);
     node.once = once.bind(node);
+    node.emit = emit.bind(node);
     return node;
   }
   return {
     on: on.bind(node),
-    once: once.bind(node)
+    once: once.bind(node),
+    emit: emit.bind(node)
   }
 }
 
