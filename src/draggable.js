@@ -51,7 +51,10 @@ function draggable(node) {
 
       const moveOff = windObs.on('mousemove', function(e) {
         e.preventDefault();
-        nodeObs.emit('dragging', dragEventDetail(e, sX, sY, pX, pY));
+        nodeObs.emit('dragging', dragEventDetail(e, sX, sY, pX, pY), {
+          bubbles: true,
+          cancelable: true
+        });
         pX = e.x;
         pY = e.y;
       });
@@ -60,10 +63,16 @@ function draggable(node) {
         upOff();
         pX = null;
         pY = null;
-        nodeObs.emit('draggingend', dragEventDetail(e, sX, sY, pX, pY));
+        nodeObs.emit('draggingend', dragEventDetail(e, sX, sY, pX, pY), {
+          bubbles: true,
+          cancelable: true
+        });
       });
 
-      nodeObs.emit('draggingstart', dragEventDetail(e, sX, sY, pX, pY));
+      nodeObs.emit('draggingstart', dragEventDetail(e, sX, sY, pX, pY), {
+        bubbles: true,
+        cancelable: true
+      });
     }
   });
 

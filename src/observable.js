@@ -40,10 +40,9 @@ function once(event) {
  * @param {any} options
  */
 function emit(event, detail, options) {
-  const customEvent = new CustomEvent(event, {
-    detail,
-    ...options
-  })
+  const customEvent = new CustomEvent(event, Object.assign({
+    detail
+  }, options))
   this.dispatchEvent(customEvent);
 }
 
