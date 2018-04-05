@@ -43,6 +43,7 @@ function draggable(node) {
   const windObs = observable(window);
   
   nodeObs.on('mousedown', function(e) {
+    e.stopPropagation();
     if (e.which === 1) {
       const sX = e.x;
       const sY = e.y;
@@ -51,6 +52,7 @@ function draggable(node) {
 
       const moveOff = windObs.on('mousemove', function(e) {
         e.preventDefault();
+        e.stopPropagation();
         nodeObs.emit('dragging', dragEventDetail(e, sX, sY, pX, pY), {
           bubbles: true,
           cancelable: true
@@ -59,6 +61,7 @@ function draggable(node) {
         pY = e.y;
       });
       const upOff = windObs.on('mouseup', function(e) {
+        e.stopPropagation();
         moveOff();
         upOff();
         pX = null;
