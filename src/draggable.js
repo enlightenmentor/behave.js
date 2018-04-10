@@ -39,18 +39,18 @@ function dragEventDetail(e, sX, sY, pX, pY) {
  */
 function draggable(node) {
   node.setAttribute('data-draggable', '');
-  const nodeObs = observable(node);
-  const windObs = observable(window);
+  var nodeObs = observable(node);
+  var windObs = observable(window);
   
   nodeObs.on('mousedown', function(e) {
     e.stopPropagation();
     if (e.which === 1) {
-      const sX = e.x;
-      const sY = e.y;
-      let pX = e.x;
-      let pY = e.y;
+      var sX = e.x;
+      var sY = e.y;
+      var pX = e.x;
+      var pY = e.y;
 
-      const moveOff = windObs.on('mousemove', function(e) {
+      var moveOff = windObs.on('mousemove', function(e) {
         e.preventDefault();
         e.stopPropagation();
         nodeObs.emit('dragging', dragEventDetail(e, sX, sY, pX, pY), {
@@ -60,7 +60,7 @@ function draggable(node) {
         pX = e.x;
         pY = e.y;
       });
-      const upOff = windObs.on('mouseup', function(e) {
+      var upOff = windObs.on('mouseup', function(e) {
         e.stopPropagation();
         moveOff();
         upOff();
