@@ -43,7 +43,7 @@ function once(event) {
  */
 function emit(event, detail, options) {
   const customEvent = new CustomEvent(event, Object.assign({
-    detail
+    detail: detail
   }, options))
   this.dispatchEvent(customEvent);
 }
