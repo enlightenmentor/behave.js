@@ -13,7 +13,9 @@
  */
 function on(event, cb) {
   this.addEventListener(event, cb);
-  return () => this.removeEventListener(event, cb);
+  return function() {
+    this.removeEventListener(event, cb)
+  }.bind(this);
 }
 
 /**
@@ -23,13 +25,13 @@ function on(event, cb) {
  * @returns {Promise} Promise that is triggered by event
  */
 function once(event) {
-  return new Promise(resolve => {
-      const cb = () => {
+  return new Promise(function(resolve) {
+      const cb = function() {
         this.removeEventListener(event, cb);
         resolve();
-      };
+      }.bind(this);
       this.addEventListener(event, cb);
-  })
+  }.bind(this))
 }
 
 /**
