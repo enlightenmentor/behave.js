@@ -55,7 +55,8 @@ function emit(event, detail, options) {
  * @param {boolean} [permanently=false] Indicates that behavior is added permanently. Defaults to false
  * @returns {(observable|EventTarget)} Object or the same HTML element with additional functionality
  */
-function observable(node, permanently=false) {
+function observable(node, permanently) {
+  permanently = (permanently == undefined) ? false : permanently;
   if (permanently) {
     node.setAttribute('data-observable', '');
     node.on = on.bind(node);

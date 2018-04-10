@@ -7,7 +7,8 @@ import observable from './observable.js';
  * @param {number} [tabindex=-1] Value of tabindex attribute. Defaults to -1
  * @returns {HTMLElement} Same HTML element but with additional functionality
  */
-function focusable(node, tabindex=-1) {
+function focusable(node, tabindex) {
+  tabindex = (tabindex == undefined) ? -1 : tabindex;
   node.setAttribute('data-focusable', '');
   node.setAttribute('tabindex', tabindex);
   const obs = observable(node);
